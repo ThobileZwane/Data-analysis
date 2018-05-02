@@ -1,0 +1,124 @@
+<h1>Zyelabs Learning Styles Score Board</h1>
+
+<%=raw @data_frame.to_html %>
+
+
+
+<div id="main" style="height: 400px;"></div>
+<script type="text/javascript">
+var dom = document.getElementById("main");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+      title: {
+        text: 'Participants Score',
+        left: 'center'
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            
+            type : 'shadow'        
+        }
+    },
+    legend: {
+        data:['Activist', 'Reflector','Theorist','Pragmatist'],
+        left: 'left'
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'value',
+            name: 'Score',
+            min: 0,
+            splitNumber: 20,
+            max: 60
+        }
+    ],
+    yAxis : [
+        {
+            type : 'category',
+            name: 'Name',
+            data : <%= raw @name.to_a %>
+        }
+    ],
+    series : [
+        {
+            name:'Activist',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:<%= raw @data_frame['Activist Score'].to_a %>        },
+        {
+            name:'Reflector',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:<%= raw @data_frame['Reflector Score'].to_a %>
+        },
+        {
+            name:'Theorist',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:<%= raw @data_frame['Theorist Score'].to_a %>
+        },
+        {
+            name:'Pragmatist',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:<%= raw @data_frame['Pragmatist Score'].to_a %>
+        }
+       
+    ]
+};
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="cat" style="height: 400px;"></div>
+<script type="text/javascript">
+var dom = document.getElementById("cat");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    xAxis: {},
+    yAxis: {},
+    series: [{
+        data: [[18, 0], [0, 10], [-12,0], [0, -8], [18,0]],
+        type: 'line'
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+
+
